@@ -1,0 +1,36 @@
+BEG_G {
+    graph_t sg;
+    node_t n;
+
+    for(sg = fstsubg($G); sg; sg = nxtsubg(sg)){
+        node_t mnnode = fstnode(sg);
+        mnnode.isMinDist = 1;
+        for(n = mnnode; n; n = nxtnode_sg(sg, n)){
+            if((float)n.dist < (float)mnnode.dist) {
+                mnnode.isMinDist = "";
+                n.isMinDist = 1;
+                mnnode = n;
+            }
+        }
+    }
+
+    $tvtype = TV_ne;
+    double scaling = (double)$G.maxdist / 15;
+}
+
+N[isMinDist==1]{
+    style = "filled";
+    fillcolor = "#bbff99";
+}
+
+N[(float)dist == 0]{
+    style = "filled";
+    fillcolor = "#aaddff";
+}
+
+E {
+    if(strcmp(head.prev,tail.name) == 0) {
+        $.color = "red";
+    }
+    $.len = (double)$.len / scaling;
+}

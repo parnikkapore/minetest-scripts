@@ -1,0 +1,14 @@
+Examples from Estercroft:
+
+-- Guard rail
+F.stnguard(-38,5,63, "Etc")
+
+-- Station rail
+F.stnplat("EtcW")
+
+-- Exit rail
+F.waypoint("EtcW")
+
+-- Junction guard rail
+F.waypoint("epr_j")
+F.junc(-213,9,14, {"EtcE","htp_j_B", "SpIN"})
